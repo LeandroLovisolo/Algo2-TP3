@@ -24,8 +24,8 @@ private:
 	estr_nodo raiz;
 public:
 	DiccTrie();
-	void Definir(const Arreglo<char> &c, const T& s);
-	T Obtener(const Arreglo<char> &c);
+	void Definir(const Categoria &c, const T& s);
+	T Obtener(const Categoria &c);
 	const int CantidadClaves();
 	//~DiccTrie();
 };

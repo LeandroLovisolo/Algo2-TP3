@@ -10,9 +10,9 @@ DiccTrie<T>::DiccTrie() : raiz() {
 //}
 
 template<class T>
-void DiccTrie<T>::Definir(const Arreglo<char> &c, const T& s) {
+void DiccTrie<T>::Definir(const Categoria &c, const T& s) {
 	estr_nodo *actual = &this->raiz;
-	for(Nat i=0;i<c.Tamanho();i++) {
+	for(Nat i=0;i<c.size();i++) {
 		if(actual->hijos[c[i]] == 0){
 			estr_nodo *nuevoNodo = new estr_nodo();
 			actual->hijos[c[i]] = nuevoNodo;
@@ -25,9 +25,9 @@ void DiccTrie<T>::Definir(const Arreglo<char> &c, const T& s) {
 }
 
 template<class T>
-T DiccTrie<T>::Obtener(const Arreglo<char> &c) {
+T DiccTrie<T>::Obtener(const Categoria &c) {
 	estr_nodo *actual = &this->raiz;
-	for(Nat i=0;i<c.Tamanho();i++) {
+	for(Nat i=0;i<c.size();i++) {
 		actual = actual->hijos[c[i]];
 	}
 	T * tempSig = actual->significado;

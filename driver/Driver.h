@@ -4,10 +4,10 @@
 #include <stdlib.h>
 
 // adaptar a los archivos que correspondan
-#include "aed2.h"
+#include "../modulos/aed2.h"
 #include "Tipos.h"
-#include "ArbolCategorias.h"
-#include "LinkLinkIt.h"
+#include "../ArbolCategorias.h"
+#include "../LinkLinkIt.h"
 //
 
 using namespace std;

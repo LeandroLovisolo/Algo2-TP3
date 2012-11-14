@@ -20,7 +20,6 @@ void DiccTrie<T>::Definir(const Categoria &c, const T& s) {
 		actual = actual->hijos[c[i]];
 	}
 	actual->significado = new T(s);
-	T * tempSig = actual->significado;
 	this->cantidadClaves++;
 }
 

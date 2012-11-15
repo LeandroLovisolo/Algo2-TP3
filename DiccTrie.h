@@ -30,7 +30,7 @@ private:
 public:
 	DiccTrie();
 	void Definir(const Categoria &c, const T& s);
-	T Obtener(const Categoria &c);
+	T& Obtener(const Categoria &c);
 	const int CantidadClaves();
 };
 

@@ -19,7 +19,7 @@ void DiccTrie<T>::Definir(const Categoria &c, const T& s) {
 }
 
 template<class T>
-T DiccTrie<T>::Obtener(const Categoria &c) {
+T& DiccTrie<T>::Obtener(const Categoria &c) {
 	estr_nodo *actual = &this->raiz;
 	for(Nat i=0;i<c.size();i++) {
 		actual = actual->hijos[c[i]];

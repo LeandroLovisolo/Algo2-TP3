@@ -1,6 +1,4 @@
 #include "ArbolCategorias.h"
-#include <iostream>
-using namespace std;
 
 ArbolCategorias::ArbolCategorias(const Categoria& c) : categorias() {
 	estr_cat nuevaCategoria = estr_cat(1, c);

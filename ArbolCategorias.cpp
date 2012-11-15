@@ -1,21 +1,27 @@
 #include "ArbolCategorias.h"
 
-ArbolCategorias::ArbolCategorias(const Categoria& c) {
+ArbolCategorias::ArbolCategorias(const Categoria& c) : categorias() {
+	estr_cat *nuevaCategoria = new estr_cat(1, c);
+	categorias.Definir(c, (*nuevaCategoria));
 }
 
 ArbolCategorias::~ArbolCategorias() {
+
 }
 
 void ArbolCategorias::agregarCategoria(const Categoria& c, const Categoria& h) {
+	estr_cat catPadre = categorias.Obtener(c);
+	estr_cat *nuevaCategoria = new estr_cat(categorias.CantidadClaves()+1, h);
+	categorias.Definir(h, *(nuevaCategoria));
+	catPadre.hijos.AgregarRapido(nuevaCategoria);
 }
 
 Categoria& ArbolCategorias::raiz() {
-	Categoria c("");
-	return c;
+	return this->root.nombre;
 }
 
 int ArbolCategorias::id(const Categoria& c) {
-	return 0;
+	return categorias.Obtener(c).id;
 }
 
 ArbolCategorias::IteradorCategoriasHijas ArbolCategorias::categoriasHijas(const Categoria& c) {
@@ -23,6 +29,7 @@ ArbolCategorias::IteradorCategoriasHijas ArbolCategorias::categoriasHijas(const 
 }
 
 ArbolCategorias::IteradorCategoriasHijas::IteradorCategoriasHijas() {
+
 }
 
 bool ArbolCategorias::IteradorCategoriasHijas::HaySiguiente() {

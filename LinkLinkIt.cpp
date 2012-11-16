@@ -47,11 +47,17 @@ void LinkLinkIt::AccederLink(const Link& l, Fecha f) {
 	if(f == estr_l.ultimoAcceso) {
 		estr_l.as[0] = estr_l.as[0] + 1;
 	} else if(f == estr_l.ultimoAcceso + 1) {
-		estr_l.as = new Fecha[3]{1, estr_l.as[0], estr_l.as[1]};
+		estr_l.as[2] = estr_l.as[1];
+		estr_l.as[1] = estr_l.as[0];
+		estr_l.as[0] = 1;
 	} else if(f == estr_l.ultimoAcceso + 2) {
-		estr_l.as = new Fecha[3]{1, 0, estr_l.as[0]};
+		estr_l.as[2] = estr_l.as[0];
+		estr_l.as[1] = 0;
+		estr_l.as[0] = 1;
 	} else {
-		estr_l.as = new Fecha[3]{1, 0, 0};
+		estr_l.as[2] = 0;
+		estr_l.as[1] = 0;
+		estr_l.as[0] = 1;
 	}
 
 	fechaActual = f;

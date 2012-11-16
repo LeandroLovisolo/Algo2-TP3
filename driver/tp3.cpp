@@ -83,11 +83,21 @@ void driverPuedeAgregarLinks() {
 	ASSERT_EQ(d.cantLinks("cat5"), 0);
 }
 
+void driverPuedeAccederLinks() {
+	Driver d;
+	d.nuevoArbol("raiz");
+	d.nuevoLink("link", "raiz");
+	for(int i = 1; i < 16; i = i * 2)
+		for(int j = 1; j <= i; j++)
+			d.acceso("link", i);
+}
+
 int main(void) {
 	RUN_TEST(trieDefineYObtieneCorrectamente);
     RUN_TEST(driverCtor);
     RUN_TEST(driverPuedeAgregarCategorias);
     RUN_TEST(driverPuedeAgregarLinks);
+    RUN_TEST(driverPuedeAccederLinks);
 
 	return 0;
 }

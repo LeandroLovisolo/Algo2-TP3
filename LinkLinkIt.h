@@ -1,10 +1,34 @@
 #ifndef LINKLINKIT_H_
 #define LINKLINKIT_H_
 
+#include "modulos/aed2.h"
 #include "driver/Tipos.h"
 #include "ArbolCategorias.h"
+#include "DiccTrie.h"
 
 class LinkLinkIt {
+	struct estr_link {
+		Link l;
+		Nat cid;
+		Fecha ultimoAcceso;
+		Fecha ac[3];
+	};
+	typedef struct estr_link estr_link;
+
+	struct estr_linksPorCatId {
+		Categoria cat;
+		Nat idPadre;
+		Lista<estr_link*> links;
+		Fecha ultimoAcceso;
+		bool ordenado;
+	};
+	typedef struct estr_linksPorCatId estr_linksPorCatId;
+
+	ArbolCategorias* acat;
+	DiccTrie<estr_link> links;
+	estr_linksPorCatId* linksPorCatId;
+	Fecha fechaActual;
+
 public:
 
 	class IteradorLinksOrdenadosPorAcceso {

@@ -6,7 +6,6 @@
 #include "DiccTrie.h"
 
 class ArbolCategorias {
-private:
 	class estr_cat {
 	public:
 		Nat id;
@@ -23,6 +22,8 @@ private:
 
 public:
 	class IteradorCategoriasHijas {
+		Conj<estr_cat*>::Iterador it;
+
 		IteradorCategoriasHijas(Conj<estr_cat*> &conjHijos);
 		friend class ArbolCategorias;
 
@@ -31,8 +32,6 @@ public:
 		const Categoria& Siguiente();
 		void Avanzar();
 		virtual ~IteradorCategoriasHijas();
-	private:
-		Conj<estr_cat*>::Iterador it;
 	};
 
 	ArbolCategorias(); // No se deberia crear sin raiz

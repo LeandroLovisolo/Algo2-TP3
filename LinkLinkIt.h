@@ -13,7 +13,6 @@ class LinkLinkIt {
 		Fecha ultimoAcceso;
 		Fecha ac[3];
 	};
-	typedef struct estr_link estr_link;
 
 	struct estr_linksPorCatId {
 		Categoria cat;
@@ -22,7 +21,6 @@ class LinkLinkIt {
 		Fecha ultimoAcceso;
 		bool ordenado;
 	};
-	typedef struct estr_linksPorCatId estr_linksPorCatId;
 
 	ArbolCategorias* acat;
 	DiccTrie<estr_link> links;

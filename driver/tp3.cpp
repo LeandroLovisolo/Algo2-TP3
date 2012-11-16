@@ -39,16 +39,16 @@ void trieDefineYObtieneCorrectamente() {
 	 *           \- a => crap
 	 */
 
-	ASSERT_EQ(d.CantidadClaves(), 0);
+	ASSERT_EQ(d.CantidadDeClaves(), 0);
 
 	d.Definir("foo", "bar");
-	ASSERT_EQ(d.CantidadClaves(), 1);
+	ASSERT_EQ(d.CantidadDeClaves(), 1);
 
 	d.Definir("casa", "house");
-	ASSERT_EQ(d.CantidadClaves(), 2);
+	ASSERT_EQ(d.CantidadDeClaves(), 2);
 
 	d.Definir("caca", "crap");
-	ASSERT_EQ(d.CantidadClaves(), 3);
+	ASSERT_EQ(d.CantidadDeClaves(), 3);
 
 	ASSERT_EQ(d.Obtener("foo"), "bar");
 	ASSERT_EQ(d.Obtener("casa"), "house");

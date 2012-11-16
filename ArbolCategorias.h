@@ -28,18 +28,22 @@ public:
 		friend class ArbolCategorias;
 
 	public:
-		bool HaySiguiente();
-		const Categoria& Siguiente();
+		bool HayMas();
+		const Categoria& CategoriaActual();
+		Nat IdCategoriaActual();
 		void Avanzar();
 		virtual ~IteradorCategoriasHijas();
 	};
 
 	ArbolCategorias(); // No se deberia crear sin raiz
 	ArbolCategorias(const Categoria&);
-	void agregarCategoria(const Categoria& c, const Categoria& h);
-	Categoria& raiz();
-	int id(const Categoria&);
-	IteradorCategoriasHijas categoriasHijas(const Categoria& c);
+	void AgregarCategoria(const Categoria& c, const Categoria& h);
+	Categoria& NombreCategoriaRaiz();
+	Nat IdCategoriaPorNombre(const Categoria&);
+	Nat CantidadDeCategorias();
+	IteradorCategoriasHijas CrearIt(const Categoria& c);
+	IteradorCategoriasHijas CrearItRaiz();
+	IteradorCategoriasHijas CrearItHijos(const IteradorCategoriasHijas& it);
 	virtual ~ArbolCategorias();
 
 };

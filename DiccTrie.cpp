@@ -1,6 +1,6 @@
 template<class T>
 DiccTrie<T>::DiccTrie() : raiz() {
-	this->cantidadClaves = 0;
+	this->cantidadDeClaves = 0;
 }
 
 template<class T>
@@ -15,7 +15,7 @@ void DiccTrie<T>::Definir(const Categoria &c, const T& s) {
 	}
 	actual->significado = new T(s);
 
-	this->cantidadClaves++;
+	this->cantidadDeClaves++;
 }
 
 template<class T>
@@ -29,6 +29,6 @@ T& DiccTrie<T>::Obtener(const Categoria &c) {
 }
 
 template<class T>
-const int DiccTrie<T>::CantidadClaves() {
-	return this->cantidadClaves;
+const Nat DiccTrie<T>::CantidadDeClaves() {
+	return this->cantidadDeClaves;
 }

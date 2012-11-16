@@ -25,13 +25,13 @@ private:
 			}
 		}
 	};
-	int cantidadClaves;
+	Nat cantidadDeClaves;
 	estr_nodo raiz;
 public:
 	DiccTrie();
 	void Definir(const Categoria &c, const T& s);
 	T& Obtener(const Categoria &c);
-	const int CantidadClaves();
+	const Nat CantidadDeClaves();
 };
 
 #include "DiccTrie.cpp"

@@ -27,24 +27,24 @@ void Driver::nuevoArbol(const Categoria& raiz)
 
 void Driver::agregarCategoria(const Categoria& c, const Categoria& h)
 {
-    arbol->agregarCategoria(c,h);
+    arbol->AgregarCategoria(c,h);
 }
 
 const Categoria& Driver::raiz()
 {
-    return arbol->raiz();
+    return arbol->NombreCategoriaRaiz();
 }
 
 int Driver::id(const Categoria& c)
 {
-    return arbol->id(c);
+    return arbol->IdCategoriaPorNombre(c);
 }
 
 int Driver::cantCategoriasHijas(const Categoria& c)
 {
     int i = 0;
-    ArbolCategorias::IteradorCategoriasHijas it = arbol->categoriasHijas(c);
-    while(it.HaySiguiente())
+    ArbolCategorias::IteradorCategoriasHijas it = arbol->CrearIt(c);
+    while(it.HayMas())
     {
         ++i;
         it.Avanzar();
@@ -55,13 +55,13 @@ int Driver::cantCategoriasHijas(const Categoria& c)
 const Categoria& Driver::obtenerIesimaCategoriaHija(const Categoria& c, int i)
 {
     int j = 0;
-    ArbolCategorias::IteradorCategoriasHijas it = arbol->categoriasHijas(c);
+    ArbolCategorias::IteradorCategoriasHijas it = arbol->CrearIt(c);
     while(j < i)
     {
         ++j;
         it.Avanzar();
     }
-    return it.Siguiente();
+    return it.CategoriaActual();
 }
 
 void Driver::nuevoLink(const Link& l, const Categoria& c)

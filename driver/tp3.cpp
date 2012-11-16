@@ -2,12 +2,6 @@
 #include "aed2_tests.h"
 #include "../DiccTrie.h"
 
-void trieDefineCorrectamente() {
-	DiccTrie<String> lala;
-	lala.Definir("lapala", "esto!");
-	ASSERT_EQ(lala.Obtener("lapala"), "esto!");
-}
-
 void driverCtor() {
 	Driver d;
 }
@@ -30,10 +24,40 @@ void driverPuedeAgregarCategorias() {
     ASSERT_EQ(d.cantCategoriasHijas("cat3"), 1);
 }
 
+void trieDefineYObtieneCorrectamente() {
+	DiccTrie<String> d;
+	/**
+	 * raíz
+	 *  |- f
+	 *  |  \- o
+	 *  |     \- o => bar
+	 *  \- c
+	 *     \- a
+	 *        |- s
+	 *        |  \- a => house
+	 *        \- c
+	 *           \- a => crap
+	 */
+
+	ASSERT_EQ(d.CantidadClaves(), 0);
+
+	d.Definir("foo", "bar");
+	ASSERT_EQ(d.CantidadClaves(), 1);
+
+	d.Definir("casa", "house");
+	ASSERT_EQ(d.CantidadClaves(), 2);
+
+	d.Definir("caca", "crap");
+	ASSERT_EQ(d.CantidadClaves(), 3);
+
+	ASSERT_EQ(d.Obtener("foo"), "bar");
+	ASSERT_EQ(d.Obtener("casa"), "house");
+	ASSERT_EQ(d.Obtener("caca"), "crap");
+}
 
 int main(void) {
     RUN_TEST(driverCtor);
     RUN_TEST(driverPuedeAgregarCategorias);
-    RUN_TEST(trieDefineCorrectamente);
+    RUN_TEST(trieDefineYObtieneCorrectamente);
 	return 0;
 }

@@ -1,7 +1,7 @@
 #include "LinkLinkIt.h"
 
 LinkLinkIt::estr_link::estr_link(const Link& l, const Categoria& c, LinkLinkIt* lli)
-		: l(l), cid(lli->acat->IdCategoriaPorNombre(c)), ultimoAcceso(lli->fechaActual), ac({0, 0, 0}) {
+		: l(l), cid(lli->acat->IdCategoriaPorNombre(c)), ultimoAcceso(lli->fechaActual), as({0, 0, 0}) {
 }
 
 LinkLinkIt::estr_linksPorCatId::estr_linksPorCatId(const Categoria& cat, Nat idPadre)
@@ -43,6 +43,25 @@ void LinkLinkIt::AgregarLink(const Link& l, const Categoria& c) {
 }
 
 void LinkLinkIt::AccederLink(const Link& l, Fecha f) {
+	estr_link estr_l = links.Obtener(l);
+	if(f == estr_l.ultimoAcceso) {
+		estr_l.as[0] = estr_l.as[0] + 1;
+	} else if(f == estr_l.ultimoAcceso + 1) {
+		estr_l.as = new Fecha[3]{1, estr_l.as[0], estr_l.as[1]};
+	} else if(f == estr_l.ultimoAcceso + 2) {
+		estr_l.as = new Fecha[3]{1, 0, estr_l.as[0]};
+	} else {
+		estr_l.as = new Fecha[3]{1, 0, 0};
+	}
+
+	fechaActual = f;
+
+	Nat cid = estr_l.cid;
+	while(cid != 0) {
+		linksPorCatId[cid - 1].ultimoAcceso = fechaActual;
+		linksPorCatId[cid - 1].ordenado = false;
+		cid = linksPorCatId[cid - 1].idPadre;
+	}
 }
 
 int LinkLinkIt::CantidadDeLinks(const Categoria& c) {

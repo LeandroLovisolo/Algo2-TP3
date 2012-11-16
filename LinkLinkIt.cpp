@@ -23,17 +23,17 @@ void LinkLinkIt::AgregarALinksPorCatId(ArbolCategorias::IteradorCategoriasHijas*
 LinkLinkIt::~LinkLinkIt() {
 }
 
-void LinkLinkIt::nuevoLink(const Link& l, const Categoria& c) {
+void LinkLinkIt::AgregarLink(const Link& l, const Categoria& c) {
 }
 
-void LinkLinkIt::acceso(const Link& l, Fecha f) {
+void LinkLinkIt::AccederLink(const Link& l, Fecha f) {
 }
 
-int LinkLinkIt::cantLinks(const Categoria& c) {
+int LinkLinkIt::CantidadDeLinks(const Categoria& c) {
 	return -1;
 }
 
-LinkLinkIt::IteradorLinksOrdenadosPorAcceso LinkLinkIt::linksOrdenadosPorAccesos(const Categoria& c) {
+LinkLinkIt::IteradorLinksOrdenadosPorAcceso LinkLinkIt::CrearIt(const Categoria& c) {
 	return IteradorLinksOrdenadosPorAcceso();
 }
 
@@ -43,19 +43,19 @@ LinkLinkIt::IteradorLinksOrdenadosPorAcceso::IteradorLinksOrdenadosPorAcceso() {
 LinkLinkIt::IteradorLinksOrdenadosPorAcceso::~IteradorLinksOrdenadosPorAcceso() {
 }
 
-bool LinkLinkIt::IteradorLinksOrdenadosPorAcceso::HaySiguiente() {
+bool LinkLinkIt::IteradorLinksOrdenadosPorAcceso::HayMas() {
 	return false;
 }
 
-const Link& LinkLinkIt::IteradorLinksOrdenadosPorAcceso::SiguienteLink() {
+const Link& LinkLinkIt::IteradorLinksOrdenadosPorAcceso::LinkActual() {
 	return "";
 }
 
-const Categoria& LinkLinkIt::IteradorLinksOrdenadosPorAcceso::SiguienteCategoria() {
+const Categoria& LinkLinkIt::IteradorLinksOrdenadosPorAcceso::CategoriaLinkActual() {
 	return "";
 }
 
-int LinkLinkIt::IteradorLinksOrdenadosPorAcceso::SiguienteAccesosRecientes() {
+int LinkLinkIt::IteradorLinksOrdenadosPorAcceso::AccesosRecientesLinkActual() {
 	return 0;
 }
 

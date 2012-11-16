@@ -36,19 +36,19 @@ public:
 		friend class LinkLinkIt;
 
 	public:
-		bool HaySiguiente();
-		const Link& SiguienteLink();
-		const Categoria& SiguienteCategoria();
-		int SiguienteAccesosRecientes();
+		bool HayMas();
+		const Link& LinkActual();
+		const Categoria& CategoriaLinkActual();
+		int AccesosRecientesLinkActual();
 		void Avanzar();
 		virtual ~IteradorLinksOrdenadosPorAcceso();
 	};
 
 	LinkLinkIt(ArbolCategorias*);
-	void nuevoLink(const Link&, const Categoria&);
-	void acceso(const Link&, Fecha);
-	int cantLinks(const Categoria&);
-	IteradorLinksOrdenadosPorAcceso linksOrdenadosPorAccesos(const Categoria&);
+	void AgregarLink(const Link&, const Categoria&);
+	void AccederLink(const Link&, Fecha);
+	int CantidadDeLinks(const Categoria&);
+	IteradorLinksOrdenadosPorAcceso CrearIt(const Categoria&);
 	virtual ~LinkLinkIt();
 
 private:

@@ -12,6 +12,8 @@ class LinkLinkIt {
 		Nat cid;
 		Fecha ultimoAcceso;
 		Fecha ac[3];
+
+		estr_link(const Link& l, const Categoria& c, LinkLinkIt* lli);
 	};
 
 	struct estr_linksPorCatId {

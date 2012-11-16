@@ -62,19 +62,25 @@ void driverPuedeAgregarLinks() {
 	 * cat1         (link1)
 	 *  |- cat2     (link2, link3)
 	 *  \- cat3     ()
-	 *      \- cat4 (link4)
+	 *      |- cat4 (link4)
+	 *      \- cat5 ()
 	 */
 	d.nuevoArbol("cat1");
 	d.agregarCategoria("cat1","cat2");
 	d.agregarCategoria("cat1","cat3");
 	d.agregarCategoria("cat3","cat4");
+	d.agregarCategoria("cat3","cat5");
 
 	d.nuevoLink("link1", "cat1");
 	d.nuevoLink("link2", "cat2");
 	d.nuevoLink("link3", "cat2");
 	d.nuevoLink("link4", "cat4");
 
-	ASSERT_EQ(d.cantLinks("cat1"), 0);
+	ASSERT_EQ(d.cantLinks("cat1"), 4);
+	ASSERT_EQ(d.cantLinks("cat2"), 2);
+	ASSERT_EQ(d.cantLinks("cat3"), 1);
+	ASSERT_EQ(d.cantLinks("cat4"), 1);
+	ASSERT_EQ(d.cantLinks("cat5"), 0);
 }
 
 int main(void) {

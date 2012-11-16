@@ -3,26 +3,23 @@
 ArbolCategorias::estr_cat::estr_cat(Nat id, const Categoria &nombre) : id(id), nombre(nombre), hijos() {
 }
 
-ArbolCategorias::estr_cat::estr_cat(const estr_cat &e) : id(e.id), nombre(e.nombre), hijos(e.hijos) {
-}
-
-ArbolCategorias::ArbolCategorias(const Categoria& c) : raiz(1, c), categorias() {
-	categorias.Definir(c, raiz);
+ArbolCategorias::ArbolCategorias(const Categoria& c) : categorias() {
+	categorias.Definir(c, estr_cat(1, c));
+	raiz = &categorias.Obtener(c);
 }
 
 ArbolCategorias::~ArbolCategorias() {
 }
 
 void ArbolCategorias::AgregarCategoria(const Categoria& c, const Categoria& h) {
-	estr_cat &catPadre = categorias.Obtener(c);
-	estr_cat *nuevaCategoria = new estr_cat(categorias.CantidadDeClaves() + 1, h);
-	categorias.Definir(h, *(nuevaCategoria));
-	catPadre.hijos.AgregarRapido(nuevaCategoria);
-	estr_cat catPadre2 = categorias.Obtener(c);
+	estr_cat& estr_padre = categorias.Obtener(c);
+	categorias.Definir(h, estr_cat(categorias.CantidadDeClaves() + 1, h));
+	estr_cat& estr_hija = categorias.Obtener(h);
+	estr_padre.hijos.AgregarRapido(&estr_hija);
 }
 
 Categoria& ArbolCategorias::NombreCategoriaRaiz() {
-	return this->raiz.nombre;
+	return this->raiz->nombre;
 }
 
 Nat ArbolCategorias::IdCategoriaPorNombre(const Categoria& c) {

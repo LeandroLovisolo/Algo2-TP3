@@ -12,11 +12,10 @@ class ArbolCategorias {
 		Categoria nombre;
 		Conj<estr_cat*> hijos;
 
-		estr_cat(const estr_cat&);
 		estr_cat(Nat id, const Categoria& nombre);
 	};
 
-	estr_cat raiz;
+	estr_cat* raiz;
 	DiccTrie<estr_cat> categorias;
 
 public:

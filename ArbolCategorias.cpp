@@ -1,24 +1,28 @@
 #include "ArbolCategorias.h"
 
-ArbolCategorias::ArbolCategorias(const Categoria& c) : categorias() {
-	estr_cat nuevaCategoria = estr_cat(1, c);
-	categorias.Definir(c, nuevaCategoria);
+ArbolCategorias::estr_cat::estr_cat(Nat id, const Categoria &nombre) : id(id), nombre(nombre), hijos() {
+}
+
+ArbolCategorias::estr_cat::estr_cat(const estr_cat &e) : id(e.id), nombre(e.nombre), hijos(e.hijos) {
+}
+
+ArbolCategorias::ArbolCategorias(const Categoria& c) : raiz(1, c), categorias() {
+	categorias.Definir(c, raiz);
 }
 
 ArbolCategorias::~ArbolCategorias() {
-
 }
 
 void ArbolCategorias::AgregarCategoria(const Categoria& c, const Categoria& h) {
 	estr_cat &catPadre = categorias.Obtener(c);
-	estr_cat *nuevaCategoria = new estr_cat(categorias.CantidadDeClaves()+1, h);
+	estr_cat *nuevaCategoria = new estr_cat(categorias.CantidadDeClaves() + 1, h);
 	categorias.Definir(h, *(nuevaCategoria));
 	catPadre.hijos.AgregarRapido(nuevaCategoria);
 	estr_cat catPadre2 = categorias.Obtener(c);
 }
 
 Categoria& ArbolCategorias::NombreCategoriaRaiz() {
-	return this->root.nombre;
+	return this->raiz.nombre;
 }
 
 Nat ArbolCategorias::IdCategoriaPorNombre(const Categoria& c) {
@@ -45,15 +49,15 @@ ArbolCategorias::IteradorCategoriasHijas::IteradorCategoriasHijas(Conj<estr_cat*
 	this->it = conjHijos.CrearIt();
 }
 
-bool ArbolCategorias::IteradorCategoriasHijas::HayMas() {
+bool ArbolCategorias::IteradorCategoriasHijas::HayMas() const {
 	return it.HaySiguiente();
 }
 
-const Categoria& ArbolCategorias::IteradorCategoriasHijas::CategoriaActual() {
+const Categoria& ArbolCategorias::IteradorCategoriasHijas::CategoriaActual() const {
 	return it.Siguiente()->nombre;
 }
 
-Nat ArbolCategorias::IteradorCategoriasHijas::IdCategoriaActual() {
+Nat ArbolCategorias::IteradorCategoriasHijas::IdCategoriaActual() const {
 	return it.Siguiente()->id;
 }
 

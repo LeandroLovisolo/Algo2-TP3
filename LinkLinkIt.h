@@ -20,11 +20,13 @@ class LinkLinkIt {
 		Lista<estr_link*> links;
 		Fecha ultimoAcceso;
 		bool ordenado;
+
+		estr_linksPorCatId(const Categoria& cat, Nat idPadre);
 	};
 
 	ArbolCategorias* acat;
 	DiccTrie<estr_link> links;
-	estr_linksPorCatId* linksPorCatId;
+	Arreglo<estr_linksPorCatId> linksPorCatId;
 	Fecha fechaActual;
 
 public:
@@ -48,6 +50,9 @@ public:
 	int cantLinks(const Categoria&);
 	IteradorLinksOrdenadosPorAcceso linksOrdenadosPorAccesos(const Categoria&);
 	virtual ~LinkLinkIt();
+
+private:
+	void AgregarALinksPorCatId(ArbolCategorias::IteradorCategoriasHijas* it, Nat idPadre);
 };
 
 #endif /* LINKLINKIT_H_ */

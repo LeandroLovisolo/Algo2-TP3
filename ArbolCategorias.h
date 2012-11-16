@@ -12,12 +12,11 @@ class ArbolCategorias {
 		Categoria nombre;
 		Conj<estr_cat*> hijos;
 
-		estr_cat() {} //como hago que no se inicializen las cosas?
-		estr_cat(Nat id, const Categoria &nombre) : id(id), nombre(nombre), hijos() {}
-		estr_cat(const estr_cat &aCopiar) : id(aCopiar.id), nombre(aCopiar.nombre), hijos(aCopiar.hijos) {}
+		estr_cat(const estr_cat&);
+		estr_cat(Nat id, const Categoria& nombre);
 	};
 
-	estr_cat root;
+	estr_cat raiz;
 	DiccTrie<estr_cat> categorias;
 
 public:
@@ -28,9 +27,9 @@ public:
 		friend class ArbolCategorias;
 
 	public:
-		bool HayMas();
-		const Categoria& CategoriaActual();
-		Nat IdCategoriaActual();
+		bool HayMas() const;
+		const Categoria& CategoriaActual() const;
+		Nat IdCategoriaActual() const;
 		void Avanzar();
 		virtual ~IteradorCategoriasHijas();
 	};

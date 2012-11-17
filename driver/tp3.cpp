@@ -98,8 +98,15 @@ void driverPuedeIterarLinks() {
 	d.nuevoLink("link1", "raiz");
 	d.nuevoLink("link2", "raiz");
 	d.nuevoLink("link3", "raiz");
-	ASSERT_EQ(d.obtenerIesimoLinkOrdenadoPorAccesos("raiz", 0), "link1");
-	ASSERT_EQ(d.obtenerIesimoLinkOrdenadoPorAccesos("raiz", 1), "link2");
+	d.acceso("link1", 1);
+	d.acceso("link1", 1);
+	d.acceso("link2", 1);
+	d.acceso("link2", 1);
+	d.acceso("link2", 1);
+	d.acceso("link3", 1);
+
+	ASSERT_EQ(d.obtenerIesimoLinkOrdenadoPorAccesos("raiz", 0), "link2");
+	ASSERT_EQ(d.obtenerIesimoLinkOrdenadoPorAccesos("raiz", 1), "link1");
 	ASSERT_EQ(d.obtenerIesimoLinkOrdenadoPorAccesos("raiz", 2), "link3");
 }
 

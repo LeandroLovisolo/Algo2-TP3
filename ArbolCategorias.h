@@ -33,8 +33,8 @@ public:
 
 	ArbolCategorias(); // No se deberia crear sin raiz
 	ArbolCategorias(const Categoria&);
-	void AgregarCategoria(const Categoria& c, const Categoria& h);
 	Categoria& NombreCategoriaRaiz();
+	void AgregarCategoria(const Categoria& padre, const Categoria& hija);
 	Nat IdCategoriaPorNombre(const Categoria&);
 	Nat CantidadDeCategorias();
 	IteradorCategoriasHijas CrearIt(const Categoria& c);

@@ -9,15 +9,15 @@ ArbolCategorias::ArbolCategorias(const Categoria& raiz) : categorias() {
 	this->raiz = &categorias.Obtener(raiz);
 }
 
-void ArbolCategorias::AgregarCategoria(const Categoria& c, const Categoria& h) {
-	estr_cat& estr_padre = categorias.Obtener(c);
-	categorias.Definir(h, estr_cat(categorias.CantidadDeClaves() + 1, h));
-	estr_cat& estr_hija = categorias.Obtener(h);
-	estr_padre.hijos.AgregarRapido(&estr_hija);
-}
-
 Categoria& ArbolCategorias::NombreCategoriaRaiz() {
 	return this->raiz->nombre;
+}
+
+void ArbolCategorias::AgregarCategoria(const Categoria& padre, const Categoria& hija) {
+	estr_cat& estr_padre = categorias.Obtener(padre);
+	categorias.Definir(hija, estr_cat(categorias.CantidadDeClaves() + 1, hija));
+	estr_cat& estr_hija = categorias.Obtener(hija);
+	estr_padre.hijos.AgregarRapido(&estr_hija);
 }
 
 Nat ArbolCategorias::IdCategoriaPorNombre(const Categoria& c) {

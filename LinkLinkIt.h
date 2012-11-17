@@ -2,7 +2,7 @@
 #define LINKLINKIT_H_
 
 #include "modulos/aed2.h"
-#include "driver/Tipos.h"
+#include "Tipos.h"
 #include "ArbolCategorias.h"
 #include "DiccTrie.h"
 

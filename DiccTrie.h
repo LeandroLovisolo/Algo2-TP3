@@ -1,6 +1,7 @@
 #ifndef DICCTRIE_H_
 #define DICCTRIE_H_
 
+#include "Tipos.h"
 #include "modulos/aed2.h"
 
 template<class T>

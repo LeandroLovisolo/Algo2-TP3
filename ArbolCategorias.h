@@ -1,8 +1,8 @@
 #ifndef ARBOLCATEGORIAS_H_
 #define ARBOLCATEGORIAS_H_
 
-#include "driver/Tipos.h"
 #include "modulos/aed2.h"
+#include "Tipos.h"
 #include "DiccTrie.h"
 
 class ArbolCategorias {

@@ -1,7 +1,6 @@
+#include "DiccTrie.h"
 #include "Driver.h"
 #include "aed2_tests.h"
-#include "../DiccTrie.h"
-#include "../LinkLinkIt.h"
 
 void trieDefineYObtieneCorrectamente() {
 	DiccTrie<String> d;

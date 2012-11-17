@@ -4,9 +4,9 @@ ArbolCategorias::estr_cat::estr_cat(Nat id, const Categoria &nombre)
 		: id(id), nombre(nombre), hijos() {
 }
 
-ArbolCategorias::ArbolCategorias(const Categoria& c) : categorias() {
-	categorias.Definir(c, estr_cat(1, c));
-	raiz = &categorias.Obtener(c);
+ArbolCategorias::ArbolCategorias(const Categoria& raiz) : categorias() {
+	categorias.Definir(raiz, estr_cat(1, raiz));
+	this->raiz = &categorias.Obtener(raiz);
 }
 
 void ArbolCategorias::AgregarCategoria(const Categoria& c, const Categoria& h) {

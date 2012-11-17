@@ -34,7 +34,11 @@ class LinkLinkIt {
 public:
 
 	class IteradorLinksOrdenadosPorAcceso {
-		IteradorLinksOrdenadosPorAcceso();
+		LinkLinkIt* lli;
+		Nat cid;
+		Lista<estr_link*>::Iterador itLista;
+
+		IteradorLinksOrdenadosPorAcceso(LinkLinkIt* lli, Nat cid, Lista<estr_link*>::Iterador itLista);
 		friend class LinkLinkIt;
 
 	public:
@@ -55,6 +59,8 @@ public:
 
 private:
 	void AgregarALinksPorCatId(ArbolCategorias::IteradorCategoriasHijas* it, Nat idPadre);
+	void OrdenarLinks(estr_linksPorCatId& estr_c);
+	Nat AccesosRecientes(estr_link& estr_l, estr_linksPorCatId& estr_c);
 };
 
 #endif /* LINKLINKIT_H_ */

@@ -31,7 +31,7 @@ LinkLinkIt::~LinkLinkIt() {
 
 void LinkLinkIt::AgregarLink(const Link& l, const Categoria& c) {
 	links.Definir(l, estr_link(l, c, this));
-	estr_link estr_l = links.Obtener(l);
+	estr_link& estr_l = links.Obtener(l);
 
 	Nat cid = estr_l.cid;
 	while(cid != 0) {
@@ -43,7 +43,7 @@ void LinkLinkIt::AgregarLink(const Link& l, const Categoria& c) {
 }
 
 void LinkLinkIt::AccederLink(const Link& l, Fecha f) {
-	estr_link estr_l = links.Obtener(l);
+	estr_link& estr_l = links.Obtener(l);
 	if(f == estr_l.ultimoAcceso) {
 		estr_l.as[0] = estr_l.as[0] + 1;
 	} else if(f == estr_l.ultimoAcceso + 1) {
@@ -75,30 +75,43 @@ int LinkLinkIt::CantidadDeLinks(const Categoria& c) {
 }
 
 LinkLinkIt::IteradorLinksOrdenadosPorAcceso LinkLinkIt::CrearIt(const Categoria& c) {
-	return IteradorLinksOrdenadosPorAcceso();
+	estr_linksPorCatId& estr_c = linksPorCatId[acat->IdCategoriaPorNombre(c) - 1];
+	if(!estr_c.ordenado) OrdenarLinks(estr_c);
+	return IteradorLinksOrdenadosPorAcceso(this, acat->IdCategoriaPorNombre(c), estr_c.links.CrearIt());
 }
 
-LinkLinkIt::IteradorLinksOrdenadosPorAcceso::IteradorLinksOrdenadosPorAcceso() {
+LinkLinkIt::IteradorLinksOrdenadosPorAcceso::IteradorLinksOrdenadosPorAcceso(
+		LinkLinkIt* lli, Nat cid, Lista<estr_link*>::Iterador itLista)
+		: lli(lli), cid(cid), itLista(itLista) {
+}
+
+void LinkLinkIt::OrdenarLinks(estr_linksPorCatId& estr_c) {
+	// TODO: Implementar sorting
+}
+
+Nat LinkLinkIt::AccesosRecientes(estr_link& estr_l, estr_linksPorCatId& estr_c) {
+	return 0;
 }
 
 LinkLinkIt::IteradorLinksOrdenadosPorAcceso::~IteradorLinksOrdenadosPorAcceso() {
 }
 
 bool LinkLinkIt::IteradorLinksOrdenadosPorAcceso::HayMas() {
-	return false;
+	return itLista.HaySiguiente();
 }
 
 const Link& LinkLinkIt::IteradorLinksOrdenadosPorAcceso::LinkActual() {
-	return "";
+	return itLista.Siguiente()->l;
 }
 
 const Categoria& LinkLinkIt::IteradorLinksOrdenadosPorAcceso::CategoriaLinkActual() {
-	return "";
+	return lli->linksPorCatId[itLista.Siguiente()->cid - 1].cat;
 }
 
 int LinkLinkIt::IteradorLinksOrdenadosPorAcceso::AccesosRecientesLinkActual() {
-	return 0;
+	return lli->AccesosRecientes(*itLista.Siguiente(), lli->linksPorCatId[cid - 1]);
 }
 
 void LinkLinkIt::IteradorLinksOrdenadosPorAcceso::Avanzar() {
+	itLista.Avanzar();
 }

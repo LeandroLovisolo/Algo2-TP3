@@ -92,12 +92,24 @@ void driverPuedeAccederLinks() {
 			d.acceso("link", i);
 }
 
+void driverPuedeIterarLinks() {
+	Driver d;
+	d.nuevoArbol("raiz");
+	d.nuevoLink("link1", "raiz");
+	d.nuevoLink("link2", "raiz");
+	d.nuevoLink("link3", "raiz");
+	ASSERT_EQ(d.obtenerIesimoLinkOrdenadoPorAccesos("raiz", 0), "link1");
+	ASSERT_EQ(d.obtenerIesimoLinkOrdenadoPorAccesos("raiz", 1), "link2");
+	ASSERT_EQ(d.obtenerIesimoLinkOrdenadoPorAccesos("raiz", 2), "link3");
+}
+
 int main(void) {
 	RUN_TEST(trieDefineYObtieneCorrectamente);
     RUN_TEST(driverCtor);
     RUN_TEST(driverPuedeAgregarCategorias);
     RUN_TEST(driverPuedeAgregarLinks);
     RUN_TEST(driverPuedeAccederLinks);
+    RUN_TEST(driverPuedeIterarLinks);
 
 	return 0;
 }

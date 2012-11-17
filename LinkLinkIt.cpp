@@ -13,17 +13,15 @@ LinkLinkIt::LinkLinkIt(ArbolCategorias* a)
 		: acat(a), links(), linksPorCatId(a->CantidadDeCategorias()), fechaActual(0) {
 	linksPorCatId.Definir(0, estr_linksPorCatId(acat->NombreCategoriaRaiz(), 0));
 	ArbolCategorias::IteradorCategoriasHijas it = acat->CrearItRaiz();
-	AgregarALinksPorCatId(&it, 1);
+	AgregarALinksPorCatId(it, 1);
 }
 
-void LinkLinkIt::AgregarALinksPorCatId(ArbolCategorias::IteradorCategoriasHijas* it, Nat idPadre) {
-	while(it->HayMas()) {
-		linksPorCatId.Definir(it->IdCategoriaActual() - 1, estr_linksPorCatId(it->CategoriaActual(), idPadre));
-		ArbolCategorias::IteradorCategoriasHijas itHijos = acat->CrearItHijos(*it);
-		ArbolCategorias::IteradorCategoriasHijas *ptr = &itHijos;
-		Nat idCatActual = it->IdCategoriaActual();
-		AgregarALinksPorCatId(ptr, idCatActual);
-		it->Avanzar();
+void LinkLinkIt::AgregarALinksPorCatId(ArbolCategorias::IteradorCategoriasHijas& it, Nat idPadre) {
+	while(it.HayMas()) {
+		linksPorCatId.Definir(it.IdCategoriaActual() - 1, estr_linksPorCatId(it.CategoriaActual(), idPadre));
+		ArbolCategorias::IteradorCategoriasHijas itHijos = acat->CrearItHijos(it);
+		AgregarALinksPorCatId(itHijos, it.IdCategoriaActual());
+		it.Avanzar();
 	}
 }
 

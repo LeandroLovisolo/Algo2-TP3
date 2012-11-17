@@ -113,7 +113,7 @@ Nat LinkLinkIt::AccesosRecientes(estr_link& estr_l, estr_linksPorCatId& estr_c) 
 
 void LinkLinkIt::Intercambiar(Lista<estr_link*>::Iterador& it, Lista<estr_link*>::Iterador& it2) {
 	if(it == it2) {
-		// Esto evita memory leaks al intentar una posición en la lista consigo misma.
+		// Esto evita memory leaks al intentar intercambiar una posición en la lista consigo misma.
 		return;
 	}
 	estr_link* ptr = it2.Siguiente();

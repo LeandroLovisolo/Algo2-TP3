@@ -13,8 +13,8 @@ class DiccTrie {
 		~estr_nodo();
 	};
 
-	Nat cantidadDeClaves;
 	estr_nodo raiz;
+	Nat cantidadDeClaves;
 
 public:
 	DiccTrie();

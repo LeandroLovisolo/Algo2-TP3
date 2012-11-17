@@ -1,14 +1,12 @@
 #include "ArbolCategorias.h"
 
-ArbolCategorias::estr_cat::estr_cat(Nat id, const Categoria &nombre) : id(id), nombre(nombre), hijos() {
+ArbolCategorias::estr_cat::estr_cat(Nat id, const Categoria &nombre)
+		: id(id), nombre(nombre), hijos() {
 }
 
 ArbolCategorias::ArbolCategorias(const Categoria& c) : categorias() {
 	categorias.Definir(c, estr_cat(1, c));
 	raiz = &categorias.Obtener(c);
-}
-
-ArbolCategorias::~ArbolCategorias() {
 }
 
 void ArbolCategorias::AgregarCategoria(const Categoria& c, const Categoria& h) {
@@ -60,7 +58,4 @@ Nat ArbolCategorias::IteradorCategoriasHijas::IdCategoriaActual() const {
 
 void ArbolCategorias::IteradorCategoriasHijas::Avanzar() {
 	it.Avanzar();
-}
-
-ArbolCategorias::IteradorCategoriasHijas::~IteradorCategoriasHijas() {
 }

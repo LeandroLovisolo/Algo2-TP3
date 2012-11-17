@@ -6,8 +6,7 @@
 #include "DiccTrie.h"
 
 class ArbolCategorias {
-	class estr_cat {
-	public:
+	struct estr_cat {
 		Nat id;
 		Categoria nombre;
 		Conj<estr_cat*> hijos;
@@ -30,7 +29,6 @@ public:
 		const Categoria& CategoriaActual() const;
 		Nat IdCategoriaActual() const;
 		void Avanzar();
-		virtual ~IteradorCategoriasHijas();
 	};
 
 	ArbolCategorias(); // No se deberia crear sin raiz
@@ -42,7 +40,6 @@ public:
 	IteradorCategoriasHijas CrearIt(const Categoria& c);
 	IteradorCategoriasHijas CrearItRaiz();
 	IteradorCategoriasHijas CrearItHijos(const IteradorCategoriasHijas& it);
-	virtual ~ArbolCategorias();
 
 };
 

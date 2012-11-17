@@ -47,7 +47,6 @@ public:
 		const Categoria& CategoriaLinkActual();
 		int AccesosRecientesLinkActual();
 		void Avanzar();
-		virtual ~IteradorLinksOrdenadosPorAcceso();
 	};
 
 	LinkLinkIt(ArbolCategorias*);
@@ -55,7 +54,6 @@ public:
 	void AccederLink(const Link&, Fecha);
 	int CantidadDeLinks(const Categoria&);
 	IteradorLinksOrdenadosPorAcceso CrearIt(const Categoria&);
-	virtual ~LinkLinkIt();
 
 private:
 	void AgregarALinksPorCatId(ArbolCategorias::IteradorCategoriasHijas* it, Nat idPadre);

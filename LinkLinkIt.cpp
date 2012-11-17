@@ -1,7 +1,8 @@
 #include "LinkLinkIt.h"
 
 LinkLinkIt::estr_link::estr_link(const Link& l, const Categoria& c, LinkLinkIt* lli)
-		: l(l), cid(lli->acat->IdCategoriaPorNombre(c)), ultimoAcceso(lli->fechaActual), as({0, 0, 0}) {
+		: l(l), cid(lli->acat->IdCategoriaPorNombre(c)), ultimoAcceso(lli->fechaActual) {
+	as[0] = as[1] = as[2] = 0;
 }
 
 LinkLinkIt::estr_linksPorCatId::estr_linksPorCatId(const Categoria& cat, Nat idPadre)
@@ -24,9 +25,6 @@ void LinkLinkIt::AgregarALinksPorCatId(ArbolCategorias::IteradorCategoriasHijas*
 		AgregarALinksPorCatId(ptr, idCatActual);
 		it->Avanzar();
 	}
-}
-
-LinkLinkIt::~LinkLinkIt() {
 }
 
 void LinkLinkIt::AgregarLink(const Link& l, const Categoria& c) {
@@ -125,9 +123,6 @@ void LinkLinkIt::Intercambiar(Lista<estr_link*>::Iterador& it, Lista<estr_link*>
 	it2.AgregarComoSiguiente(it.Siguiente());
 	it.EliminarSiguiente();
 	it.AgregarComoSiguiente(ptr);
-}
-
-LinkLinkIt::IteradorLinksOrdenadosPorAcceso::~IteradorLinksOrdenadosPorAcceso() {
 }
 
 bool LinkLinkIt::IteradorLinksOrdenadosPorAcceso::HayMas() {

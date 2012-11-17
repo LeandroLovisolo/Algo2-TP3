@@ -6,10 +6,10 @@ template<class T>
 void DiccTrie<T>::Definir(const string& c, const T& s) {
 	estr_nodo* actual = &this->raiz;
 	for(Nat i = 0; i < c.size(); i++) {
-		if(actual->hijos[Nat(c[i])] == NULL) {
-			actual->hijos[Nat(c[i])] = new estr_nodo();
+		if(actual->hijos[c[i]] == NULL) {
+			actual->hijos[c[i]] = new estr_nodo();
 		}
-		actual = actual->hijos[Nat(c[i])];
+		actual = actual->hijos[c[i]];
 	}
 	actual->significado = new T(s);
 	this->cantidadDeClaves++;

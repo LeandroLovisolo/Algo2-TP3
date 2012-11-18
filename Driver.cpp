@@ -43,7 +43,7 @@ int Driver::id(const Categoria& c)
 int Driver::cantCategoriasHijas(const Categoria& c)
 {
     int i = 0;
-    ArbolCategorias::IteradorCategoriasHijas it = arbol->CrearIt(c);
+    ArbolCategorias::Iterador it = arbol->CrearIt(c);
     while(it.HayMas())
     {
         ++i;
@@ -55,7 +55,7 @@ int Driver::cantCategoriasHijas(const Categoria& c)
 const Categoria& Driver::obtenerIesimaCategoriaHija(const Categoria& c, int i)
 {
     int j = 0;
-    ArbolCategorias::IteradorCategoriasHijas it = arbol->CrearIt(c);
+    ArbolCategorias::Iterador it = arbol->CrearIt(c);
     while(j < i)
     {
         ++j;

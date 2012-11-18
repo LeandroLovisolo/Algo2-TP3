@@ -56,7 +56,7 @@ public:
 	Iterador CrearIt(const Categoria&);
 
 private:
-	void AgregarALinksPorCatId(ArbolCategorias::IteradorCategoriasHijas& it, Nat idPadre);
+	void AgregarALinksPorCatId(ArbolCategorias::Iterador& it, Nat idPadre);
 	void OrdenarLinks(estr_linksPorCatId& estr_c);
 	Nat AccesosRecientes(estr_link& estr_l, estr_linksPorCatId& estr_c);
 	void Intercambiar(Lista<estr_link*>::Iterador& it, Lista<estr_link*>::Iterador& it2);

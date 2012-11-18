@@ -28,34 +28,34 @@ Nat ArbolCategorias::CantidadDeCategorias() {
 	return categorias.CantidadDeClaves();
 }
 
-ArbolCategorias::IteradorCategoriasHijas ArbolCategorias::CrearIt(const Categoria& c) {
-	return IteradorCategoriasHijas(categorias.Obtener(c).hijos);
+ArbolCategorias::Iterador ArbolCategorias::CrearIt(const Categoria& c) {
+	return Iterador(categorias.Obtener(c).hijos);
 }
 
-ArbolCategorias::IteradorCategoriasHijas ArbolCategorias::CrearItRaiz() {
-	return IteradorCategoriasHijas(categorias.Obtener(NombreCategoriaRaiz()).hijos);
+ArbolCategorias::Iterador ArbolCategorias::CrearItRaiz() {
+	return Iterador(categorias.Obtener(NombreCategoriaRaiz()).hijos);
 }
 
-ArbolCategorias::IteradorCategoriasHijas ArbolCategorias::CrearItHijos(const IteradorCategoriasHijas& it) {
-	return IteradorCategoriasHijas(it.it.Siguiente()->hijos);
+ArbolCategorias::Iterador ArbolCategorias::CrearItHijos(const Iterador& it) {
+	return Iterador(it.it.Siguiente()->hijos);
 }
 
-ArbolCategorias::IteradorCategoriasHijas::IteradorCategoriasHijas(Conj<estr_cat*> &conjHijos) {
+ArbolCategorias::Iterador::Iterador(Conj<estr_cat*> &conjHijos) {
 	this->it = conjHijos.CrearIt();
 }
 
-bool ArbolCategorias::IteradorCategoriasHijas::HayMas() const {
+bool ArbolCategorias::Iterador::HayMas() const {
 	return it.HaySiguiente();
 }
 
-const Categoria& ArbolCategorias::IteradorCategoriasHijas::CategoriaActual() const {
+const Categoria& ArbolCategorias::Iterador::CategoriaActual() const {
 	return it.Siguiente()->nombre;
 }
 
-Nat ArbolCategorias::IteradorCategoriasHijas::IdCategoriaActual() const {
+Nat ArbolCategorias::Iterador::IdCategoriaActual() const {
 	return it.Siguiente()->id;
 }
 
-void ArbolCategorias::IteradorCategoriasHijas::Avanzar() {
+void ArbolCategorias::Iterador::Avanzar() {
 	it.Avanzar();
 }

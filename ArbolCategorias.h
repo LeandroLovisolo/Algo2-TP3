@@ -18,10 +18,10 @@ class ArbolCategorias {
 	DiccTrie<estr_cat> categorias;
 
 public:
-	class IteradorCategoriasHijas {
+	class Iterador {
 		Conj<estr_cat*>::Iterador it;
 
-		IteradorCategoriasHijas(Conj<estr_cat*> &conjHijos);
+		Iterador(Conj<estr_cat*> &conjHijos);
 		friend class ArbolCategorias;
 
 	public:
@@ -37,9 +37,9 @@ public:
 	void AgregarCategoria(const Categoria& padre, const Categoria& hija);
 	Nat IdCategoriaPorNombre(const Categoria&);
 	Nat CantidadDeCategorias();
-	IteradorCategoriasHijas CrearIt(const Categoria& c);
-	IteradorCategoriasHijas CrearItRaiz();
-	IteradorCategoriasHijas CrearItHijos(const IteradorCategoriasHijas& it);
+	Iterador CrearIt(const Categoria& c);
+	Iterador CrearItRaiz();
+	Iterador CrearItHijos(const Iterador& it);
 
 };
 

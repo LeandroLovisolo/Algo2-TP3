@@ -33,12 +33,12 @@ class LinkLinkIt {
 
 public:
 
-	class IteradorLinksOrdenadosPorAcceso {
+	class Iterador {
 		LinkLinkIt* lli;
 		Nat cid;
 		Lista<estr_link*>::Iterador itLista;
 
-		IteradorLinksOrdenadosPorAcceso(LinkLinkIt* lli, Nat cid, const Lista<estr_link*>::Iterador& itLista);
+		Iterador(LinkLinkIt* lli, Nat cid, const Lista<estr_link*>::Iterador& itLista);
 		friend class LinkLinkIt;
 
 	public:
@@ -53,7 +53,7 @@ public:
 	void AgregarLink(const Link&, const Categoria&);
 	void AccederLink(const Link&, Fecha);
 	int CantidadDeLinks(const Categoria&);
-	IteradorLinksOrdenadosPorAcceso CrearIt(const Categoria&);
+	Iterador CrearIt(const Categoria&);
 
 private:
 	void AgregarALinksPorCatId(ArbolCategorias::IteradorCategoriasHijas& it, Nat idPadre);

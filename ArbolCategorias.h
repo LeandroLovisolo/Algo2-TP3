@@ -19,9 +19,9 @@ class ArbolCategorias {
 
 public:
 	class Iterador {
-		Conj<estr_cat*>::Iterador it;
+		Conj<estr_cat*>::const_Iterador it;
 
-		Iterador(Conj<estr_cat*> &conjHijos);
+		Iterador(const Conj<estr_cat*> &conjHijos);
 		friend class ArbolCategorias;
 
 	public:
@@ -31,15 +31,14 @@ public:
 		void Avanzar();
 	};
 
-	ArbolCategorias(); // No se deberia crear sin raiz
 	ArbolCategorias(const Categoria&);
-	Categoria& NombreCategoriaRaiz();
+	const Categoria& NombreCategoriaRaiz() const;
 	void AgregarCategoria(const Categoria& padre, const Categoria& hija);
-	Nat IdCategoriaPorNombre(const Categoria&);
-	Nat CantidadDeCategorias();
-	Iterador CrearIt(const Categoria& c);
-	Iterador CrearItRaiz();
-	Iterador CrearItHijos(const Iterador& it);
+	Nat IdCategoriaPorNombre(const Categoria&) const;
+	Nat CantidadDeCategorias() const;
+	Iterador CrearIt(const Categoria& c) const;
+	Iterador CrearItRaiz() const;
+	Iterador CrearItHijos(const Iterador& it) const;
 
 };
 

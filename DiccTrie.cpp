@@ -16,6 +16,15 @@ void DiccTrie<T>::Definir(const string& c, const T& s) {
 }
 
 template<class T>
+const T& DiccTrie<T>::Obtener(const string &c) const {
+	const estr_nodo* actual = &this->raiz;
+	for(Nat i = 0; i < c.size(); i++) {
+		actual = actual->hijos[c[i]];
+	}
+	return *actual->significado;
+}
+
+template<class T>
 T& DiccTrie<T>::Obtener(const string &c) {
 	estr_nodo* actual = &this->raiz;
 	for(Nat i = 0; i < c.size(); i++) {
@@ -25,7 +34,7 @@ T& DiccTrie<T>::Obtener(const string &c) {
 }
 
 template<class T>
-const Nat DiccTrie<T>::CantidadDeClaves() {
+Nat DiccTrie<T>::CantidadDeClaves() const {
 	return this->cantidadDeClaves;
 }
 

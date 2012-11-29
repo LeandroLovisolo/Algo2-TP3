@@ -26,7 +26,7 @@ class LinkLinkIt {
 		estr_linksPorCatId(const Categoria& cat, Nat idPadre);
 	};
 
-	ArbolCategorias* acat;
+	const ArbolCategorias& acat;
 	DiccTrie<estr_link> links;
 	Arreglo<estr_linksPorCatId> linksPorCatId;
 	Fecha fechaActual;
@@ -42,24 +42,24 @@ public:
 		friend class LinkLinkIt;
 
 	public:
-		bool HayMas();
-		const Link& LinkActual();
-		const Categoria& CategoriaLinkActual();
-		int AccesosRecientesLinkActual();
+		bool HayMas() const;
+		const Link& LinkActual() const;
+		const Categoria& CategoriaLinkActual() const;
+		Nat AccesosRecientesLinkActual() const;
 		void Avanzar();
 	};
 
-	LinkLinkIt(ArbolCategorias*);
+	LinkLinkIt(const ArbolCategorias&);
 	void AgregarLink(const Link&, const Categoria&);
 	void AccederLink(const Link&, Fecha);
-	int CantidadDeLinks(const Categoria&);
+	Nat CantidadDeLinks(const Categoria&) const;
 	Iterador CrearIt(const Categoria&);
 
 private:
 	void AgregarALinksPorCatId(ArbolCategorias::Iterador& it, Nat idPadre);
-	void OrdenarLinks(estr_linksPorCatId& estr_c);
-	Nat AccesosRecientes(estr_link& estr_l, estr_linksPorCatId& estr_c);
-	void Intercambiar(Lista<estr_link*>::Iterador& it, Lista<estr_link*>::Iterador& it2);
+	void OrdenarLinks(estr_linksPorCatId& estr_c) const;
+	Nat AccesosRecientes(const estr_link& estr_l, const estr_linksPorCatId& estr_c) const;
+	void Intercambiar(Lista<estr_link*>::Iterador& it, Lista<estr_link*>::Iterador& it2) const;
 };
 
 #endif /* LINKLINKIT_H_ */

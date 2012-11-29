@@ -1,7 +1,7 @@
 #include "LinkLinkIt.h"
 
 LinkLinkIt::estr_link::estr_link(const Link& l, const Categoria& c, LinkLinkIt* lli)
-		: l(l), cid(lli->acat->IdCategoriaPorNombre(c)), ultimoAcceso(lli->fechaActual) {
+		: l(l), cid(lli->acat.IdCategoriaPorNombre(c)), ultimoAcceso(lli->fechaActual) {
 	as[0] = as[1] = as[2] = 0;
 }
 
@@ -9,17 +9,17 @@ LinkLinkIt::estr_linksPorCatId::estr_linksPorCatId(const Categoria& cat, Nat idP
 		: cat(cat), idPadre(idPadre), links(), ultimoAcceso(0), ordenado(false) {
 }
 
-LinkLinkIt::LinkLinkIt(ArbolCategorias* a)
-		: acat(a), links(), linksPorCatId(a->CantidadDeCategorias()), fechaActual(0) {
-	linksPorCatId.Definir(0, estr_linksPorCatId(acat->NombreCategoriaRaiz(), 0));
-	ArbolCategorias::Iterador it = acat->CrearItRaiz();
+LinkLinkIt::LinkLinkIt(const ArbolCategorias& a)
+		: acat(a), links(), linksPorCatId(a.CantidadDeCategorias()), fechaActual(0) {
+	linksPorCatId.Definir(0, estr_linksPorCatId(acat.NombreCategoriaRaiz(), 0));
+	ArbolCategorias::Iterador it = acat.CrearItRaiz();
 	AgregarALinksPorCatId(it, 1);
 }
 
 void LinkLinkIt::AgregarALinksPorCatId(ArbolCategorias::Iterador& it, Nat idPadre) {
 	while(it.HayMas()) {
 		linksPorCatId.Definir(it.IdCategoriaActual() - 1, estr_linksPorCatId(it.CategoriaActual(), idPadre));
-		ArbolCategorias::Iterador itHijos = acat->CrearItHijos(it);
+		ArbolCategorias::Iterador itHijos = acat.CrearItHijos(it);
 		AgregarALinksPorCatId(itHijos, it.IdCategoriaActual());
 		it.Avanzar();
 	}
@@ -67,14 +67,14 @@ void LinkLinkIt::AccederLink(const Link& l, Fecha f) {
 	}
 }
 
-int LinkLinkIt::CantidadDeLinks(const Categoria& c) {
-	return linksPorCatId[acat->IdCategoriaPorNombre(c) - 1].links.Longitud();
+Nat LinkLinkIt::CantidadDeLinks(const Categoria& c) const {
+	return linksPorCatId[acat.IdCategoriaPorNombre(c) - 1].links.Longitud();
 }
 
 LinkLinkIt::Iterador LinkLinkIt::CrearIt(const Categoria& c) {
-	estr_linksPorCatId& estr_c = linksPorCatId[acat->IdCategoriaPorNombre(c) - 1];
+	estr_linksPorCatId& estr_c = linksPorCatId[acat.IdCategoriaPorNombre(c) - 1];
 	if(!estr_c.ordenado) OrdenarLinks(estr_c);
-	return Iterador(this, acat->IdCategoriaPorNombre(c), estr_c.links.CrearIt());
+	return Iterador(this, acat.IdCategoriaPorNombre(c), estr_c.links.CrearIt());
 }
 
 LinkLinkIt::Iterador::Iterador(
@@ -82,7 +82,7 @@ LinkLinkIt::Iterador::Iterador(
 		: lli(lli), cid(cid), itLista(itLista) {
 }
 
-void LinkLinkIt::OrdenarLinks(estr_linksPorCatId& estr_c) {
+void LinkLinkIt::OrdenarLinks(estr_linksPorCatId& estr_c) const {
 	Lista<estr_link*>::Iterador it = estr_c.links.CrearIt();
 	while(it.HaySiguiente()) {
 		Lista<estr_link*>::Iterador it2 = Lista<estr_link*>::Iterador(it);
@@ -99,7 +99,7 @@ void LinkLinkIt::OrdenarLinks(estr_linksPorCatId& estr_c) {
 	estr_c.ordenado = true;
 }
 
-Nat LinkLinkIt::AccesosRecientes(estr_link& estr_l, estr_linksPorCatId& estr_c) {
+Nat LinkLinkIt::AccesosRecientes(const estr_link& estr_l, const estr_linksPorCatId& estr_c) const {
 	if(estr_c.ultimoAcceso == estr_l.ultimoAcceso) {
 		return estr_l.as[0] + estr_l.as[1] + estr_l.as[2];
 	} else if(estr_c.ultimoAcceso == estr_l.ultimoAcceso + 1) {
@@ -111,7 +111,7 @@ Nat LinkLinkIt::AccesosRecientes(estr_link& estr_l, estr_linksPorCatId& estr_c) 
 	}
 }
 
-void LinkLinkIt::Intercambiar(Lista<estr_link*>::Iterador& it, Lista<estr_link*>::Iterador& it2) {
+void LinkLinkIt::Intercambiar(Lista<estr_link*>::Iterador& it, Lista<estr_link*>::Iterador& it2) const {
 	if(it == it2) {
 		// Esto evita memory leaks al intentar intercambiar una posición en la lista consigo misma.
 		return;
@@ -123,19 +123,19 @@ void LinkLinkIt::Intercambiar(Lista<estr_link*>::Iterador& it, Lista<estr_link*>
 	it.AgregarComoSiguiente(ptr);
 }
 
-bool LinkLinkIt::Iterador::HayMas() {
+bool LinkLinkIt::Iterador::HayMas() const {
 	return itLista.HaySiguiente();
 }
 
-const Link& LinkLinkIt::Iterador::LinkActual() {
+const Link& LinkLinkIt::Iterador::LinkActual() const {
 	return itLista.Siguiente()->l;
 }
 
-const Categoria& LinkLinkIt::Iterador::CategoriaLinkActual() {
+const Categoria& LinkLinkIt::Iterador::CategoriaLinkActual() const {
 	return lli->linksPorCatId[itLista.Siguiente()->cid - 1].cat;
 }
 
-int LinkLinkIt::Iterador::AccesosRecientesLinkActual() {
+Nat LinkLinkIt::Iterador::AccesosRecientesLinkActual() const {
 	return lli->AccesosRecientes(*itLista.Siguiente(), lli->linksPorCatId[cid - 1]);
 }
 

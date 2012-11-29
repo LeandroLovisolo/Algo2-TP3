@@ -9,7 +9,7 @@ ArbolCategorias::ArbolCategorias(const Categoria& raiz) : categorias() {
 	this->raiz = &categorias.Obtener(raiz);
 }
 
-Categoria& ArbolCategorias::NombreCategoriaRaiz() {
+const Categoria& ArbolCategorias::NombreCategoriaRaiz() const {
 	return this->raiz->nombre;
 }
 
@@ -20,27 +20,27 @@ void ArbolCategorias::AgregarCategoria(const Categoria& padre, const Categoria& 
 	estr_padre.hijos.AgregarRapido(&estr_hija);
 }
 
-Nat ArbolCategorias::IdCategoriaPorNombre(const Categoria& c) {
+Nat ArbolCategorias::IdCategoriaPorNombre(const Categoria& c) const {
 	return categorias.Obtener(c).id;
 }
 
-Nat ArbolCategorias::CantidadDeCategorias() {
+Nat ArbolCategorias::CantidadDeCategorias() const {
 	return categorias.CantidadDeClaves();
 }
 
-ArbolCategorias::Iterador ArbolCategorias::CrearIt(const Categoria& c) {
+ArbolCategorias::Iterador ArbolCategorias::CrearIt(const Categoria& c) const{
 	return Iterador(categorias.Obtener(c).hijos);
 }
 
-ArbolCategorias::Iterador ArbolCategorias::CrearItRaiz() {
+ArbolCategorias::Iterador ArbolCategorias::CrearItRaiz() const {
 	return Iterador(categorias.Obtener(NombreCategoriaRaiz()).hijos);
 }
 
-ArbolCategorias::Iterador ArbolCategorias::CrearItHijos(const Iterador& it) {
+ArbolCategorias::Iterador ArbolCategorias::CrearItHijos(const Iterador& it) const {
 	return Iterador(it.it.Siguiente()->hijos);
 }
 
-ArbolCategorias::Iterador::Iterador(Conj<estr_cat*> &conjHijos) {
+ArbolCategorias::Iterador::Iterador(const Conj<estr_cat*> &conjHijos) {
 	this->it = conjHijos.CrearIt();
 }
 

@@ -20,8 +20,9 @@ class DiccTrie {
 public:
 	DiccTrie();
 	void Definir(const string &c, const T& s);
+	const T& Obtener(const string &c) const;
 	T& Obtener(const string &c);
-	const Nat CantidadDeClaves();
+	Nat CantidadDeClaves() const;
 };
 
 #include "DiccTrie.cpp"
